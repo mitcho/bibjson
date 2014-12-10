@@ -1,4 +1,8 @@
+// Michael Yoshitaka Erlewine <mitcho@mitcho.com>
+// Dedicated to the public domain, 2014
+
 var parser = require('bibtex-parser-js'),
+	format = require('jsonf'),
 	fs = require('fs'),
 	util = require('util');
 
@@ -10,7 +14,12 @@ paperarchive = paperarchive.replace(/@comment{BibDesk Static Groups{(.|\n)*}}/m,
 var bib = parser.toJSON(paperarchive);
 
 function cleanup(text) {
-	text = text.replace('{\\v \\i}','ǐ'); // for bǐ
+	// todo: it would be great if this could be automated somehow:
+ 	text = text.replace('{\\v \\i}','ǐ'); // for bǐ
+ 	text = text.replace('{\\u \\a}','ă');
+ 	text = text.replace('{\\c \\s}','ş');
+ 	
+	text = text.replace('\\VAN{Urk}', 'van Urk'); // for Coppe
 	text = text.replace(/{(\w)}/g,'$1');
 	text = text.replace(/{\\em ([^}]*)}/g,'<em>$1</em>');
 	return text;
@@ -47,4 +56,4 @@ for (i in bib) {
 	mybib.push(convertItem(item));
 }
 
-util.print(JSON.stringify(mybib));
+util.print(format(JSON.stringify(mybib)));
