@@ -31,7 +31,7 @@ function convertItem(item) {
 		entryType: item.entryType.toLowerCase(),
 		keywords: []
 	};
-	var keys = ['AUTHOR','EDITOR','TITLE','URL','NOTE'];
+	var keys = ['AUTHOR','EDITOR','TITLE','URL','NOTE','YEAR'];
 	for (i in keys) {
 		if (keys[i] in item.entryTags)
 			newItem[keys[i].toLowerCase()] = cleanup(item.entryTags[keys[i]]);
