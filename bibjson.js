@@ -28,8 +28,8 @@ function cleanup(text) {
  	text = text.replace('\\&','&amp;');
  	
 	text = text.replace('\\VAN{Urk}', 'van Urk'); // for Coppe
-	text = text.replace(/{(\w+)}/g,'$1');
 	text = text.replace(/{\\em ([^}]*)}/g,'<em>$1</em>');
+	text = text.replace(/{(.+?)}/g,'$1');
 	
 	return text;
 }
